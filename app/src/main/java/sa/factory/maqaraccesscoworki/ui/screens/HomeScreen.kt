@@ -27,6 +27,8 @@ fun HomeScreen(
     onItemClick: (MaqarAccessItem) -> Unit
 ) {
     val categories = listOf("الكل", "الخدمات الرئيسية", "المراقبة الحية", "التقارير الضريبية", "الإعدادات")
+    val defaultPeripheral = "13.56 MHz RFID Turnstile Access + TOTP Pass"
+    val activePeripheralName = state.telemetry?.peripheralName ?: defaultPeripheral
 
     Column(
         modifier = Modifier
@@ -36,7 +38,7 @@ fun HomeScreen(
     ) {
         // Header
         Column {
-            Text("تطبيق مقر الذكي — مبرمج ممثل تقني لاجتماع مراج", fontSize = 22.sp, fontWeight = FontWeight.Black, color = BrandTextPrimary)
+            Text("تطبيق مقر الذكي - منصة إدارة مساحات العمل المشتركة", fontSize = 22.sp, fontWeight = FontWeight.Black, color = BrandTextPrimary)
             Text("منظومة coworking المتكاملة مع ربط 13.56 MHz RFID Turnstile Access + TOTP Pass", fontSize = 12.sp, color = BrandTextSecondary)
         }
 
@@ -52,7 +54,7 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text("العتاد الحي: ${state.telemetry?.peripheralName ?: '13.56 MHz RFID Turnstile Access + TOTP Pass'}", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 13.sp)
+                    Text("العتاد الحي: $activePeripheralName", fontWeight = FontWeight.Bold, color = BrandPrimary, fontSize = 13.sp)
                     Text(state.telemetry?.liveReading ?: "13.56 MHz RFID Turnstile Access + TOTP Pass: ONLINE | READY", fontSize = 11.sp, color = BrandTextSecondary)
                 }
                 Badge(containerColor = BrandPrimary) {
